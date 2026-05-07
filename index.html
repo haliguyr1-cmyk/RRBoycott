@@ -21,16 +21,8 @@
     --text3: #5a5448;
     --radius: 10px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
 
   /* ── Topbar ── */
   .topbar {
@@ -41,9 +33,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 200;
   }
   .topbar::before {
     content: '';
@@ -54,195 +47,119 @@
   }
   .logo {
     font-family: 'Cinzel', serif;
-    font-size: 15px;
-    font-weight: 700;
+    font-size: 15px; font-weight: 700;
     color: var(--gold);
     letter-spacing: 0.05em;
     text-shadow: 0 0 20px rgba(212,160,23,0.4);
+    white-space: nowrap; flex-shrink: 0;
   }
-  .logo span {
-    color: var(--text2);
-    font-weight: 400;
-    font-size: 12px;
-    margin-left: 8px;
-  }
+  .logo span { color: var(--text2); font-weight: 400; font-size: 12px; margin-left: 8px; }
+  .topbar-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .topbar-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(192,57,43,0.12);
-    border: 1px solid rgba(192,57,43,0.3);
-    border-radius: 20px;
-    padding: 4px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    color: #e74c3c;
-    letter-spacing: 0.04em;
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(192,57,43,0.12); border: 1px solid rgba(192,57,43,0.3);
+    border-radius: 20px; padding: 4px 12px;
+    font-size: 11px; font-weight: 600; color: #e74c3c;
+    letter-spacing: 0.04em; white-space: nowrap;
   }
   .topbar-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: #e74c3c;
-    animation: pulse 1.8s ease-in-out infinite;
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: #e74c3c; animation: pulse 1.8s ease-in-out infinite;
   }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.8)} }
+
+  /* ── Language selector ── */
+  .lang-wrap { position: relative; }
+  .lang-btn {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--bg3); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 5px 10px;
+    cursor: pointer; font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 600; color: var(--gold);
+    transition: all 0.15s; white-space: nowrap;
   }
+  .lang-btn:hover { background: var(--bg4); border-color: var(--gold); }
+  .lang-flag { font-size: 17px; line-height: 1; }
+  .lang-chevron { font-size: 9px; opacity: 0.6; transition: transform 0.2s; }
+  .lang-wrap.open .lang-chevron { transform: rotate(180deg); }
+  .lang-dropdown {
+    display: none; position: absolute;
+    top: calc(100% + 6px); right: 0;
+    background: var(--bg2); border: 1px solid var(--border2);
+    border-radius: var(--radius); min-width: 230px;
+    z-index: 999; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    max-height: 420px; overflow-y: auto;
+  }
+  .lang-wrap.open .lang-dropdown { display: block; }
+  .lang-opt {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; cursor: pointer;
+    border: none; background: none; width: 100%;
+    font-family: 'Inter', sans-serif; text-align: left;
+    transition: background 0.1s;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+  .lang-opt:last-child { border-bottom: none; }
+  .lang-opt:hover { background: var(--bg3); }
+  .lang-opt.active { background: rgba(212,160,23,0.08); }
+  .lang-opt-flag { font-size: 20px; flex-shrink: 0; }
+  .lang-opt-names { display: flex; flex-direction: column; gap: 1px; flex: 1; min-width: 0; }
+  .lang-opt-en { font-size: 12px; font-weight: 600; color: var(--text); }
+  .lang-opt-native { font-size: 11px; color: var(--text3); }
+  .lang-opt-code {
+    font-size: 10px; font-weight: 700; color: var(--text3);
+    background: var(--bg4); border-radius: 4px; padding: 1px 5px; flex-shrink: 0;
+  }
+  .lang-opt.active .lang-opt-code { color: var(--gold); background: rgba(212,160,23,0.1); }
 
   /* ── Layout ── */
-  .content {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 2rem 1.25rem 3rem;
-  }
+  .content { max-width: 780px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
 
   /* ── Hero ── */
   .hero {
-    text-align: center;
-    margin-bottom: 2rem;
+    text-align: center; margin-bottom: 2rem;
     padding: 2.5rem 1.5rem;
     background: linear-gradient(135deg, rgba(192,57,43,0.07), rgba(212,160,23,0.05));
     border: 1px solid rgba(212,160,23,0.2);
-    border-radius: var(--radius);
-    position: relative;
-    overflow: hidden;
+    border-radius: var(--radius); position: relative; overflow: hidden;
   }
   .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, transparent, var(--gold), transparent);
   }
-  .hero-eyebrow {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 10px;
-  }
-  .hero-title {
-    font-family: 'Cinzel', serif;
-    font-size: clamp(20px, 4vw, 28px);
-    font-weight: 700;
-    color: var(--gold);
-    letter-spacing: 0.04em;
-    text-shadow: 0 0 30px rgba(212,160,23,0.3);
-    margin-bottom: 12px;
-    line-height: 1.3;
-  }
-  .hero-sub {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.7;
-    max-width: 560px;
-    margin: 0 auto 1.25rem;
-  }
-  .hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .hero-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-  .hero-stat-val {
-    font-family: 'Cinzel', serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--gold);
-  }
-  .hero-stat-lbl {
-    font-size: 10px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-  .hero-stat-divider {
-    width: 1px;
-    height: 36px;
-    background: var(--border);
-    align-self: center;
-  }
+  .hero-eyebrow { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 10px; }
+  .hero-title { font-family: 'Cinzel', serif; font-size: clamp(20px, 4vw, 28px); font-weight: 700; color: var(--gold); letter-spacing: 0.04em; text-shadow: 0 0 30px rgba(212,160,23,0.3); margin-bottom: 12px; line-height: 1.3; }
+  .hero-sub { font-size: 13px; color: var(--text2); line-height: 1.7; max-width: 560px; margin: 0 auto 1.25rem; }
+  .hero-stats { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+  .hero-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .hero-stat-val { font-family: 'Cinzel', serif; font-size: 22px; font-weight: 700; color: var(--gold); }
+  .hero-stat-lbl { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; }
+  .hero-stat-divider { width: 1px; height: 36px; background: var(--border); align-self: center; }
 
   /* ── Instruction strip ── */
   .instruction-strip {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 10px 14px;
-    margin-bottom: 12px;
-    font-size: 12px;
-    color: var(--text3);
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;
+    font-size: 12px; color: var(--text3);
   }
   .instruction-strip span { color: var(--gold); font-size: 14px; }
 
   /* ── Accordion ── */
-  .bacc-item {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    margin-bottom: 8px;
-    overflow: hidden;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
+  .bacc-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
   .bacc-item:hover { border-color: var(--border2); }
-  .bacc-item.open {
-    border-color: rgba(212,160,23,0.35);
-    box-shadow: 0 0 0 1px rgba(212,160,23,0.08);
-  }
-  .bacc-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    cursor: pointer;
-    user-select: none;
-    transition: background 0.15s;
-  }
+  .bacc-item.open { border-color: rgba(212,160,23,0.35); box-shadow: 0 0 0 1px rgba(212,160,23,0.08); }
+  .bacc-header { display: flex; align-items: center; gap: 12px; padding: 14px 16px; cursor: pointer; user-select: none; transition: background 0.15s; }
   .bacc-header:hover { background: var(--bg3); }
   .bacc-item.open .bacc-header { background: var(--bg3); }
-  .bacc-icon {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: rgba(212,160,23,0.1);
-    border: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-  .bacc-title {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    flex: 1;
-    font-family: 'Inter', sans-serif;
-  }
-  .bacc-chevron {
-    font-size: 10px;
-    color: var(--text3);
-    transition: transform 0.25s ease;
-    flex-shrink: 0;
-  }
+  .bacc-icon { width: 32px; height: 32px; border-radius: 50%; background: rgba(212,160,23,0.1); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .bacc-title { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+  .bacc-chevron { font-size: 10px; color: var(--text3); transition: transform 0.25s ease; flex-shrink: 0; }
   .bacc-item.open .bacc-chevron { transform: rotate(180deg); }
   .bacc-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
   .bacc-divider { height: 1px; background: var(--border); margin: 0 16px; }
-  .bacc-inner {
-    padding: 16px 16px 18px;
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.75;
-  }
+  .bacc-inner { padding: 16px 16px 18px; font-size: 13px; color: var(--text2); line-height: 1.75; }
   .bacc-inner p { margin-bottom: 9px; }
   .bacc-inner p:last-child { margin-bottom: 0; }
   .bacc-inner strong { color: var(--text); font-weight: 500; }
@@ -250,217 +167,378 @@
   .bacc-inner ul { padding-left: 1.2rem; margin: 6px 0 9px; }
   .bacc-inner li { margin-bottom: 5px; }
 
-  /* ── Step list used in "what to do" section ── */
-  .step-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
+  /* ── Step rows ── */
+  .step-row { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
   .step-row:last-child { border-bottom: none; padding-bottom: 0; }
-  .step-num {
-    width: 26px; height: 26px;
-    border-radius: 50%;
-    background: rgba(212,160,23,0.1);
-    border: 1px solid var(--border);
-    color: var(--gold);
-    font-size: 11px; font-weight: 700;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 1px;
-    font-family: 'Cinzel', serif;
-  }
+  .step-num { width: 26px; height: 26px; border-radius: 50%; background: rgba(212,160,23,0.1); border: 1px solid var(--border); color: var(--gold); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-family: 'Cinzel', serif; }
   .step-text { font-size: 13px; color: var(--text2); line-height: 1.65; flex: 1; }
   .step-text strong { color: var(--text); font-weight: 500; }
 
   /* ── Footer ── */
-  .footer {
-    margin-top: 2.5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-    text-align: center;
-    font-size: 11px;
-    color: var(--text3);
-    line-height: 1.8;
-  }
-  .footer a { color: var(--gold-dark); text-decoration: none; }
-  .footer a:hover { color: var(--gold); }
+  .footer { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; font-size: 11px; color: var(--text3); line-height: 1.8; }
 
   /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 5px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--bg4); border-radius: 3px; }
+
+  @media (max-width: 480px) {
+    .topbar-badge { display: none; }
+    .topbar { padding: 0 1rem; }
+    .logo span { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Topbar -->
 <div class="topbar">
   <div class="logo">⚔ Rush Royale<span>Community Movement</span></div>
-  <div class="topbar-badge">BOYCOTT ACTIVE</div>
+  <div class="topbar-right">
+    <div class="topbar-badge" data-key="badge">BOYCOTT ACTIVE</div>
+    <div class="lang-wrap" id="lang-wrap">
+      <button class="lang-btn" onclick="toggleLang()" id="lang-btn">
+        <span class="lang-flag" id="lang-flag">🇬🇧</span>
+        <span id="lang-code">EN</span>
+        <span class="lang-chevron">▼</span>
+      </button>
+      <div class="lang-dropdown" id="lang-dropdown"></div>
+    </div>
+  </div>
 </div>
 
 <div class="content">
-
-  <!-- Hero -->
   <div class="hero">
-    <div class="hero-eyebrow">Official Community Announcement</div>
-    <div class="hero-title">🚫 Rush Royale Boycott</div>
-    <div class="hero-sub">
-      Clan leaders and key figures across the Rush Royale community have come together to coordinate a spending boycott. Read below to understand why, when, and how you can stand with us.
-    </div>
+    <div class="hero-eyebrow" data-key="eyebrow">Official Community Announcement</div>
+    <div class="hero-title">🚫 <span data-key="hero_title">Rush Royale Boycott</span></div>
+    <div class="hero-sub" data-key="hero_sub">Clan leaders and key figures across the Rush Royale community have come together to coordinate a spending boycott. Read below to understand why, when, and how you can stand with us.</div>
     <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-val">150+</div>
-        <div class="hero-stat-lbl">Clans United</div>
-      </div>
+      <div class="hero-stat"><div class="hero-stat-val">150+</div><div class="hero-stat-lbl" data-key="stat_clans">Clans United</div></div>
       <div class="hero-stat-divider"></div>
-      <div class="hero-stat">
-        <div class="hero-stat-val">1</div>
-        <div class="hero-stat-lbl">Goal</div>
-      </div>
+      <div class="hero-stat"><div class="hero-stat-val">1</div><div class="hero-stat-lbl" data-key="stat_goal">Goal</div></div>
       <div class="hero-stat-divider"></div>
-      <div class="hero-stat">
-        <div class="hero-stat-val">0</div>
-        <div class="hero-stat-lbl">Spending</div>
-      </div>
+      <div class="hero-stat"><div class="hero-stat-val">0</div><div class="hero-stat-lbl" data-key="stat_spend">Spending</div></div>
     </div>
   </div>
 
-  <!-- Instruction strip -->
-  <div class="instruction-strip">
-    <span>▼</span>
-    Click any section to expand — hover to highlight.
-  </div>
+  <div class="instruction-strip"><span>▼</span> <span data-key="instruction">Click any section to expand — hover to highlight.</span></div>
 
-  <!-- Accordion 1 -->
   <div class="bacc-item" id="b1">
     <div class="bacc-header" onclick="baccToggle('b1')">
       <div class="bacc-icon">❓</div>
-      <div class="bacc-title">Why are we boycotting the new unit?</div>
+      <div class="bacc-title" data-key="q1_title">Why are we boycotting the new unit?</div>
       <div class="bacc-chevron">▼</div>
     </div>
-    <div class="bacc-body" id="b1-body">
-      <div class="bacc-divider"></div>
-      <div class="bacc-inner">
-        <p>We all fell in love with Rush Royale or the community surrounding it and want it desperately to succeed. Many people have tried to pass on amazing suggestions and feedback through official channels — the main Discord, the Roundtable — but for the most part these have fallen on deaf ears.</p>
-        <p>Many, if not all of us, know someone who has quit the game because they either can't or don't want to spend just to enjoy it.</p>
-        <p>We have exhausted all formal discussion forums but receive nothing in return other than being palmed off with "it's been passed on." <strong>This boycott intends to target where the developers care most — their bottom line.</strong></p>
-        <p>We hope that by boycotting the unit we will elicit some degree of accountability and genuine dialogue between developers and the community as a whole, to bring about meaningful improvements for the long-term health of the game.</p>
-      </div>
-    </div>
+    <div class="bacc-body" id="b1-body"><div class="bacc-divider"></div><div class="bacc-inner" data-key="q1_body"></div></div>
   </div>
 
-  <!-- Accordion 2 -->
   <div class="bacc-item" id="b2">
     <div class="bacc-header" onclick="baccToggle('b2')">
       <div class="bacc-icon">📅</div>
-      <div class="bacc-title">When is this planned to go ahead?</div>
+      <div class="bacc-title" data-key="q2_title">When is this planned to go ahead?</div>
       <div class="bacc-chevron">▼</div>
     </div>
-    <div class="bacc-body" id="b2-body">
-      <div class="bacc-divider"></div>
-      <div class="bacc-inner">
-        <p>The planned beginning of the boycott is on the <strong>release of the new unit</strong>. We ask that you encourage your community to not spend or participate in the Festival of Talents. This means:</p>
-        <ul>
-          <li>No buying the new unit</li>
-          <li>Minimal — and if possible zero — spending for the entire duration of the event</li>
-        </ul>
-        <p>More information will be provided towards the conclusion of the event on whether the spending boycott continues after the Festival of Talents, if meaningful dialogue hasn't been opened.</p>
-        <p>We want to see <strong>genuine commitments to improvements in the game with timelines that are both reasonable and not just "soon"</strong> — as we have been told many times before.</p>
-      </div>
-    </div>
+    <div class="bacc-body" id="b2-body"><div class="bacc-divider"></div><div class="bacc-inner" data-key="q2_body"></div></div>
   </div>
 
-  <!-- Accordion 3 -->
   <div class="bacc-item" id="b3">
     <div class="bacc-header" onclick="baccToggle('b3')">
       <div class="bacc-icon">✊</div>
-      <div class="bacc-title">What can you do right now to support this movement?</div>
+      <div class="bacc-title" data-key="q3_title">What can you do right now?</div>
       <div class="bacc-chevron">▼</div>
     </div>
-    <div class="bacc-body" id="b3-body">
-      <div class="bacc-divider"></div>
-      <div class="bacc-inner">
-        <div class="step-row">
-          <div class="step-num">1</div>
-          <div class="step-text"><strong>Revert your profile cosmetics</strong> to the default Bombardier profile picture and remove all cosmetics such as badges, titles, decorations, and frames. This acts as a show of how coordinated and unified the community is in banding together. <em>Note: CCs are exempt from the blank profile movement and have been excused from visible participation due to threats from the developer programme.</em></div>
-        </div>
-        <div class="step-row">
-          <div class="step-num">2</div>
-          <div class="step-text"><strong>Stop spending when the Festival of Talents starts.</strong> If you wish to purchase the season pass or future event passes like Mirror Match or Masters Tournament, buy the platinum <em>beforehand</em> to minimise spending as much as possible during the event period.</div>
-        </div>
-        <div class="step-row">
-          <div class="step-num">3</div>
-          <div class="step-text"><strong>Spread the word</strong> to every player you can reach. Many players aren't active on Discord or reachable through easy channels — the more people who know, the stronger our message.</div>
-        </div>
-      </div>
-    </div>
+    <div class="bacc-body" id="b3-body"><div class="bacc-divider"></div><div class="bacc-inner" data-key="q3_body"></div></div>
   </div>
 
-  <!-- Accordion 4 -->
   <div class="bacc-item" id="b4">
     <div class="bacc-header" onclick="baccToggle('b4')">
       <div class="bacc-icon">⚔️</div>
-      <div class="bacc-title">What if I face Moloch in PvP and feel compelled to spend?</div>
+      <div class="bacc-title" data-key="q4_title">What if I face Moloch in PvP?</div>
       <div class="bacc-chevron">▼</div>
     </div>
-    <div class="bacc-body" id="b4-body">
-      <div class="bacc-divider"></div>
-      <div class="bacc-inner">
-        <p>We are doing our very best to spread the word, but there are many players who aren't involved in Discord or who are not reachable through easy-to-find channels. So whilst we want to make sure as few Molochs appear in PvP as possible, it is impossible to guarantee none will.</p>
-        <p><strong>All we ask is that you resist the temptation for this season.</strong> Eventually the unit will be nerfed and then another unit will be released. If you're normally a spender and feel you're missing out — remember that leaderboards won't carry the same sense of accomplishment if the game's player base has left en masse.</p>
-        <p>For clans: if some members can't be contacted or choose not to participate, <strong>we are not asking for them to be removed</strong>. We cannot force anyone. All we can do is provide the reasoning — whilst we hope most will agree, some may not and that's the reality.</p>
-        <p>As a community lead, <strong>leading by example</strong> will go further than anything else. If you are passionate about this, your community will see it and are more likely to engage positively.</p>
-      </div>
-    </div>
+    <div class="bacc-body" id="b4-body"><div class="bacc-divider"></div><div class="bacc-inner" data-key="q4_body"></div></div>
   </div>
 
-  <!-- Accordion 5 -->
   <div class="bacc-item" id="b5">
     <div class="bacc-header" onclick="baccToggle('b5')">
       <div class="bacc-icon">📋</div>
-      <div class="bacc-title">What are we actually asking for?</div>
+      <div class="bacc-title" data-key="q5_title">What are we actually asking for?</div>
       <div class="bacc-chevron">▼</div>
     </div>
-    <div class="bacc-body" id="b5-body">
-      <div class="bacc-divider"></div>
-      <div class="bacc-inner">
-        <p>An open letter is being sent to the developers outlining in detail the points raised here and requesting reasonable, tangible improvements for the game's long-term health.</p>
-        <p>We are not asking for the moon. <strong>We want to be treated as the amazing community we actually are</strong> — not as a revenue source to be ignored until the next unit drops.</p>
-        <p>Specifically we want to see genuine commitments with real timelines, meaningful engagement from the development team, and acknowledgement that the community's feedback has value.</p>
-        <p><em>Open letter link — coming soon.</em></p>
-      </div>
-    </div>
+    <div class="bacc-body" id="b5-body"><div class="bacc-divider"></div><div class="bacc-inner" data-key="q5_body"></div></div>
   </div>
 
-  <!-- Accordion 6 -->
   <div class="bacc-item" id="b6">
     <div class="bacc-header" onclick="baccToggle('b6')">
       <div class="bacc-icon">🤝</div>
-      <div class="bacc-title">Conclusion — stand as one</div>
+      <div class="bacc-title" data-key="q6_title">Conclusion — stand as one</div>
       <div class="bacc-chevron">▼</div>
     </div>
-    <div class="bacc-body" id="b6-body">
-      <div class="bacc-divider"></div>
-      <div class="bacc-inner">
-        <p>Whilst this is a lot of information, it is important — and potentially our only real shot to make some impact.</p>
-        <p>Are we likely to immediately get everything we want? No. But should that be a reason to give up? Absolutely not.</p>
-        <p>We are incredible individuals who have all come together for the good of the game. <strong>We represent over 150 clans</strong> and together we can bring about real change when we work as one.</p>
-        <p>Time to put down the wallet and pick up the metaphorical pitchfork — because we are going to do this together. If we stand as one we can and will send a strong message, so please stand with us as we try to make this game better for the good of every single one of our community members.</p>
-      </div>
-    </div>
+    <div class="bacc-body" id="b6-body"><div class="bacc-divider"></div><div class="bacc-inner" data-key="q6_body"></div></div>
   </div>
 
-  <!-- Footer -->
   <div class="footer">
-    <p>This is an unofficial community movement and is not affiliated with or endorsed by the Rush Royale development team.</p>
-    <p style="margin-top:6px">Coordinated by clan leaders across the Rush Royale community &nbsp;·&nbsp; <strong style="color:var(--text3)">150+ clans united</strong></p>
+    <p data-key="footer1">This is an unofficial community movement and is not affiliated with or endorsed by the Rush Royale development team.</p>
+    <p style="margin-top:6px" data-key="footer2">Coordinated by clan leaders across the Rush Royale community · <strong style="color:var(--text3)">150+ clans united</strong></p>
   </div>
-
 </div>
 
 <script>
+const LANGS = [
+  { code:'EN', flag:'🇬🇧', en:'English',    native:'English' },
+  { code:'DE', flag:'🇩🇪', en:'German',     native:'Deutsch' },
+  { code:'ES', flag:'🇪🇸', en:'Spanish',    native:'Español' },
+  { code:'FR', flag:'🇫🇷', en:'French',     native:'Français' },
+  { code:'IT', flag:'🇮🇹', en:'Italian',    native:'Italiano' },
+  { code:'NL', flag:'🇳🇱', en:'Dutch',      native:'Nederlands' },
+  { code:'PT', flag:'🇵🇹', en:'Portuguese', native:'Português' },
+  { code:'RU', flag:'🇷🇺', en:'Russian',    native:'Русский' },
+  { code:'TR', flag:'🇹🇷', en:'Turkish',    native:'Türkçe' },
+  { code:'RO', flag:'🇷🇴', en:'Romanian',   native:'Română' },
+];
+
+const T = {
+  EN: {
+    badge:'BOYCOTT ACTIVE', eyebrow:'Official Community Announcement', hero_title:'Rush Royale Boycott',
+    hero_sub:'Clan leaders and key figures across the Rush Royale community have come together to coordinate a spending boycott. Read below to understand why, when, and how you can stand with us.',
+    stat_clans:'Clans United', stat_goal:'Goal', stat_spend:'Spending',
+    instruction:'Click any section to expand — hover to highlight.',
+    q1_title:'Why are we boycotting the new unit?',
+    q1_body:`<p>We all fell in love with Rush Royale or the community surrounding it and want it desperately to succeed. Many people have tried to pass on amazing suggestions and feedback through official channels — the main Discord, the Roundtable — but for the most part these have fallen on deaf ears.</p><p>Many, if not all of us, know someone who has quit the game because they either can't or don't want to spend just to enjoy it.</p><p>We have exhausted all formal discussion forums but receive nothing in return other than being palmed off. <strong>This boycott intends to target where the developers care most — their bottom line.</strong></p><p>We hope to force some degree of accountability and genuine dialogue to bring about meaningful improvements for the long-term health of the game.</p>`,
+    q2_title:'When is this planned to go ahead?',
+    q2_body:`<p>The boycott begins on the <strong>release of the new unit</strong>. We ask that you encourage your community to not spend or participate in the Festival of Talents. This means:</p><ul><li>No buying the new unit</li><li>Minimal — and if possible zero — spending for the entire duration of the event</li></ul><p>More information will be provided towards the conclusion of the event on whether the boycott continues if meaningful dialogue hasn't been opened.</p><p>We want to see <strong>genuine commitments to improvements with reasonable timelines</strong> — not vague promises of "soon."</p>`,
+    q3_title:'What can you do right now?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Revert your profile cosmetics</strong> to the default Bombardier profile picture and remove all badges, titles, decorations, and frames. This shows how coordinated and unified the community is. <em>CCs are exempt due to threats from the developer programme.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Stop spending during the Festival of Talents.</strong> If you plan to purchase the season pass or future event passes, buy your platinum <em>beforehand</em> to minimise spending during the event period.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Spread the word</strong> to every player you can reach. Many players aren't on Discord — the more people who know, the stronger our message.</div></div>`,
+    q4_title:'What if I face Moloch in PvP?',
+    q4_body:`<p>Not every player is reachable through Discord or community channels, so some Molochs will inevitably appear in PvP. We understand this.</p><p><strong>Please resist the temptation for this season.</strong> The unit will eventually be nerfed. If you miss out on leaderboard positions — remember, those positions won't mean much if the game's player base has left en masse.</p><p>For clans: if some members can't be reached, <strong>we are not asking for them to be removed</strong>. Do whatever you feel is best as a community lead.</p><p>As a community lead, <strong>leading by example</strong> will go further than anything else.</p>`,
+    q5_title:'What are we actually asking for?',
+    q5_body:`<p>An open letter will be sent to the developers outlining in detail the points raised here and requesting reasonable, tangible improvements for the game's long-term health.</p><p><strong>We do not want to be treated as pay pigs.</strong> We want to be seen as the amazing community we actually are.</p><p><em>Open letter link — coming soon.</em></p>`,
+    q6_title:'Conclusion — stand as one',
+    q6_body:`<p>This is important — and potentially our only real shot to make an impact. Will we immediately get everything we want? No. Should that be reason to give up? Absolutely not.</p><p>We represent <strong>over 150 clans</strong> and together we can bring about real change. Put down the wallet and pick up the metaphorical pitchfork — because we are doing this together.</p><p>If we stand as one, we will send a strong message. Please stand with us.</p>`,
+    footer1:'This is an unofficial community movement and is not affiliated with or endorsed by the Rush Royale development team.',
+    footer2:'Coordinated by clan leaders across the Rush Royale community · <strong style="color:var(--text3)">150+ clans united</strong>',
+  },
+  DE: {
+    badge:'BOYKOTT AKTIV', eyebrow:'Offizielle Community-Ankündigung', hero_title:'Rush Royale Boykott',
+    hero_sub:'Clanführer und wichtige Persönlichkeiten der Rush-Royale-Community haben sich zusammengeschlossen, um einen Ausgabenboykott zu koordinieren. Lest unten, warum, wann und wie ihr mit uns zusammenstehen könnt.',
+    stat_clans:'Vereinte Clans', stat_goal:'Ziel', stat_spend:'Ausgaben',
+    instruction:'Klickt einen Abschnitt, um ihn zu öffnen — Hover zum Hervorheben.',
+    q1_title:'Warum boykottieren wir die neue Einheit?',
+    q1_body:`<p>Wir alle haben Rush Royale oder die Community rund ums Spiel geliebt und wollen, dass es erfolgreich ist. Viele haben versucht, Vorschläge über offizielle Kanäle weiterzugeben — den Discord, den Roundtable — aber das wurde größtenteils ignoriert.</p><p>Viele von uns kennen jemanden, der das Spiel verlassen hat, weil er nicht zahlen kann oder will.</p><p>Wir haben alle formalen Diskussionsforen ausgeschöpft. <strong>Dieser Boykott soll dort treffen, wo es den Entwicklern am meisten wichtig ist — ihre Einnahmen.</strong></p><p>Wir hoffen, echte Rechenschaftspflicht und Dialog zu erzwingen.</p>`,
+    q2_title:'Wann ist dieser Boykott geplant?',
+    q2_body:`<p>Der Boykott beginnt mit der <strong>Veröffentlichung der neuen Einheit</strong>. Wir bitten euch, eure Community dazu zu ermutigen, beim Festival of Talents nichts auszugeben.</p><ul><li>Die neue Einheit nicht kaufen</li><li>Minimale — wenn möglich keine — Ausgaben für die gesamte Eventdauer</li></ul><p>Weitere Informationen folgen zum Ende des Events.</p><p>Wir wollen <strong>echte Verpflichtungen mit realistischen Zeitplänen</strong> — keine vagen Versprechen wie "bald".</p>`,
+    q3_title:'Was könnt ihr jetzt tun?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Setzt euer Profil zurück</strong> auf das Standard-Bombardier-Profilbild und entfernt alle Abzeichen, Titel, Dekorationen und Rahmen. <em>CCs sind aufgrund von Drohungen des Entwicklerprogramms ausgenommen.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Stoppt die Ausgaben während des Festivals of Talents.</strong> Kauft euer Platin <em>vorher</em>, um Ausgaben während des Events zu minimieren.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Verbreitet die Botschaft</strong> an alle Spieler, die ihr erreichen könnt.</div></div>`,
+    q4_title:'Was wenn ich Moloch im PvP treffe?',
+    q4_body:`<p>Nicht jeder Spieler ist über Discord erreichbar, daher werden einige Molochs im PvP auftauchen.</p><p><strong>Bitte widersteht der Versuchung in dieser Saison.</strong> Die Einheit wird irgendwann genervt.</p><p>Für Clans: <strong>wir bitten nicht darum, unerreichbare Mitglieder zu entfernen</strong>. Handelt nach eigenem Ermessen.</p><p>Als Communityführer ist <strong>das eigene Vorbild</strong> das Wirkungsvollste.</p>`,
+    q5_title:'Was fordern wir eigentlich?',
+    q5_body:`<p>Ein offener Brief wird an die Entwickler geschickt, der konkrete Verbesserungen fordert.</p><p><strong>Wir wollen nicht wie Melkkühe behandelt werden.</strong> Wir wollen als die großartige Community wahrgenommen werden, die wir sind.</p><p><em>Link zum offenen Brief — folgt in Kürze.</em></p>`,
+    q6_title:'Fazit — gemeinsam stark',
+    q6_body:`<p>Das ist wichtig — und möglicherweise unsere einzige echte Chance. Werden wir sofort alles bekommen? Nein. Aber sollte das ein Grund zum Aufgeben sein? Absolut nicht.</p><p>Wir repräsentieren <strong>über 150 Clans</strong>. Legt die Geldbörse hin — wir machen das gemeinsam.</p><p>Wenn wir als Einheit stehen, senden wir eine starke Botschaft.</p>`,
+    footer1:'Dies ist eine inoffizielle Community-Bewegung und ist nicht mit dem Rush-Royale-Entwicklungsteam verbunden.',
+    footer2:'Koordiniert von Clanführern der Rush-Royale-Community · <strong style="color:var(--text3)">150+ Clans vereint</strong>',
+  },
+  ES: {
+    badge:'BOICOT ACTIVO', eyebrow:'Anuncio Oficial de la Comunidad', hero_title:'Boicot de Rush Royale',
+    hero_sub:'Los líderes de clanes y figuras clave de la comunidad de Rush Royale se han unido para coordinar un boicot de gastos.',
+    stat_clans:'Clanes Unidos', stat_goal:'Objetivo', stat_spend:'Gastos',
+    instruction:'Haz clic en cualquier sección para expandir — pasa el cursor para resaltar.',
+    q1_title:'¿Por qué boicoteamos la nueva unidad?',
+    q1_body:`<p>Todos nos enamoramos de Rush Royale o de la comunidad que lo rodea y queremos que tenga éxito. Muchos han intentado enviar sugerencias a través de canales oficiales pero en su mayoría han caído en saco roto.</p><p>Hemos agotado todos los foros formales sin obtener nada a cambio. <strong>Este boicot apunta donde más les importa a los desarrolladores — sus ingresos.</strong></p>`,
+    q2_title:'¿Cuándo está planeado?',
+    q2_body:`<p>El boicot comienza con el <strong>lanzamiento de la nueva unidad</strong>.</p><ul><li>No comprar la nueva unidad</li><li>Gastos mínimos — y si es posible nulos — durante todo el evento</li></ul><p>Queremos ver <strong>compromisos genuinos de mejoras con plazos razonables</strong> — no promesas vagas de "pronto".</p>`,
+    q3_title:'¿Qué puedes hacer ahora mismo?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Revierte tus cosméticos de perfil</strong> a la imagen predeterminada del Bombardero y elimina todas las insignias, títulos y decoraciones. <em>Los CCs están exentos.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Deja de gastar durante el Festival of Talents.</strong> Compra tu platino <em>antes</em> del evento.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Difunde el mensaje</strong> a todos los jugadores que puedas alcanzar.</div></div>`,
+    q4_title:'¿Qué pasa si me enfrento a Moloch en PvP?',
+    q4_body:`<p>Inevitablemente aparecerán algunos Molochs en PvP. Lo entendemos.</p><p><strong>Por favor, resiste la tentación esta temporada.</strong> La unidad eventualmente será nerfeada.</p><p>Para los clanes: <strong>no pedimos que se expulse a nadie</strong>. Actúa según tu criterio.</p>`,
+    q5_title:'¿Qué estamos pidiendo realmente?',
+    q5_body:`<p>Se enviará una carta abierta a los desarrolladores solicitando mejoras razonables y concretas.</p><p><strong>No queremos ser tratados como fuentes de dinero.</strong> Queremos ser vistos como la increíble comunidad que realmente somos.</p><p><em>Enlace a la carta abierta — próximamente.</em></p>`,
+    q6_title:'Conclusión — unidos como uno',
+    q6_body:`<p>Representamos a <strong>más de 150 clanes</strong> y juntos podemos lograr un cambio real. Guardemos la billetera y levantemos las horcas metafóricas.</p><p>Si nos mantenemos unidos, enviaremos un mensaje poderoso. Por favor, únete a nosotros.</p>`,
+    footer1:'Este es un movimiento comunitario no oficial y no está afiliado ni respaldado por el equipo de desarrollo de Rush Royale.',
+    footer2:'Coordinado por líderes de clanes de la comunidad de Rush Royale · <strong style="color:var(--text3)">150+ clanes unidos</strong>',
+  },
+  FR: {
+    badge:'BOYCOTT ACTIF', eyebrow:'Annonce Officielle de la Communauté', hero_title:'Boycott Rush Royale',
+    hero_sub:'Les chefs de clan et figures clés de la communauté Rush Royale se sont réunis pour coordonner un boycott des dépenses.',
+    stat_clans:'Clans Unis', stat_goal:'Objectif', stat_spend:'Dépenses',
+    instruction:'Cliquez sur une section pour la développer — survolez pour la mettre en évidence.',
+    q1_title:'Pourquoi boycottons-nous la nouvelle unité ?',
+    q1_body:`<p>Nous sommes tous tombés amoureux de Rush Royale ou de sa communauté. Les suggestions envoyées via les canaux officiels ont été ignorées.</p><p><strong>Ce boycott vise là où les développeurs sont le plus sensibles — leurs revenus.</strong></p><p>Nous espérons obtenir une vraie responsabilisation et un dialogue sincère.</p>`,
+    q2_title:'Quand cela est-il prévu ?',
+    q2_body:`<p>Le boycott commence à la <strong>sortie de la nouvelle unité</strong>.</p><ul><li>Ne pas acheter la nouvelle unité</li><li>Dépenses minimales — et si possible nulles — pendant toute la durée de l'événement</li></ul><p>Nous voulons <strong>de vrais engagements avec des délais raisonnables</strong> — pas de vagues promesses de "bientôt".</p>`,
+    q3_title:'Que pouvez-vous faire maintenant ?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Rétablissez vos cosmétiques de profil</strong> à l'image par défaut du Bombardier et supprimez tous les badges, titres et décorations. <em>Les CCs sont exemptés.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Arrêtez de dépenser pendant le Festival of Talents.</strong> Achetez votre platine <em>avant</em> l'événement.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Faites passer le message</strong> à tous les joueurs que vous pouvez atteindre.</div></div>`,
+    q4_title:'Que faire si j\'affronte Moloch en PvP ?',
+    q4_body:`<p>Certains Molochs apparaîtront inévitablement en PvP. Nous le comprenons.</p><p><strong>Résistez à la tentation cette saison.</strong> L'unité sera éventuellement nerfée.</p><p>Pour les clans : <strong>nous ne demandons pas à exclure qui que ce soit</strong>. Agissez selon votre jugement.</p>`,
+    q5_title:'Que demandons-nous exactement ?',
+    q5_body:`<p>Une lettre ouverte sera envoyée aux développeurs demandant des améliorations concrètes.</p><p><strong>Nous ne voulons pas être traités comme des vaches à lait.</strong></p><p><em>Lien vers la lettre ouverte — bientôt disponible.</em></p>`,
+    q6_title:'Conclusion — unis comme un seul',
+    q6_body:`<p>Nous représentons <strong>plus de 150 clans</strong> et ensemble nous pouvons apporter un vrai changement.</p><p>Si nous restons unis, nous enverrons un message fort. Rejoignez-nous.</p>`,
+    footer1:'Ceci est un mouvement communautaire non officiel, non affilié à l\'équipe de développement de Rush Royale.',
+    footer2:'Coordonné par des chefs de clan de la communauté Rush Royale · <strong style="color:var(--text3)">150+ clans unis</strong>',
+  },
+  IT: {
+    badge:'BOICOTTAGGIO ATTIVO', eyebrow:'Annuncio Ufficiale della Community', hero_title:'Boicottaggio Rush Royale',
+    hero_sub:'I leader dei clan e le figure chiave della community di Rush Royale si sono uniti per coordinare un boicottaggio alle spese.',
+    stat_clans:'Clan Uniti', stat_goal:'Obiettivo', stat_spend:'Spese',
+    instruction:'Clicca su una sezione per espanderla — passa il cursore per evidenziare.',
+    q1_title:'Perché boicottiamo la nuova unità?',
+    q1_body:`<p>Ci siamo tutti innamorati di Rush Royale e vogliamo che abbia successo. I suggerimenti trasmessi tramite i canali ufficiali sono stati per lo più ignorati.</p><p><strong>Questo boicottaggio mira dove gli sviluppatori tengono di più — ai loro profitti.</strong></p>`,
+    q2_title:'Quando è previsto?',
+    q2_body:`<p>Il boicottaggio inizia con il <strong>rilascio della nuova unità</strong>.</p><ul><li>Non acquistare la nuova unità</li><li>Spese minime — e se possibile zero — per l'intera durata dell'evento</li></ul><p>Vogliamo vedere <strong>impegni concreti con scadenze ragionevoli</strong> — non vaghe promesse di "presto".</p>`,
+    q3_title:'Cosa puoi fare adesso?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Ripristina i cosmetici del profilo</strong> all'immagine predefinita del Bombardiere e rimuovi tutti i badge, titoli e decorazioni. <em>I CC sono esenti.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Smetti di spendere durante il Festival of Talents.</strong> Compra il platino <em>prima</em> dell'evento.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Diffondete il messaggio</strong> a tutti i giocatori che riuscite a raggiungere.</div></div>`,
+    q4_title:'Cosa fare se affronto Moloch nel PvP?',
+    q4_body:`<p>Alcuni Moloch appariranno inevitabilmente nel PvP. Lo capiamo.</p><p><strong>Resistete alla tentazione in questa stagione.</strong></p><p>Per i clan: <strong>non chiediamo di espellere nessuno</strong>. Agite secondo il vostro giudizio.</p>`,
+    q5_title:'Cosa stiamo chiedendo esattamente?',
+    q5_body:`<p>Una lettera aperta verrà inviata agli sviluppatori chiedendo miglioramenti concreti.</p><p><strong>Non vogliamo essere trattati come bancomat.</strong></p><p><em>Link alla lettera aperta — prossimamente.</em></p>`,
+    q6_title:'Conclusione — uniti come uno',
+    q6_body:`<p>Rappresentiamo <strong>oltre 150 clan</strong> e insieme possiamo portare un vero cambiamento.</p><p>Se restiamo uniti, invieremo un messaggio forte. Unitevi a noi.</p>`,
+    footer1:'Questo è un movimento comunitario non ufficiale, non affiliato con il team di sviluppo di Rush Royale.',
+    footer2:'Coordinato dai leader dei clan della community di Rush Royale · <strong style="color:var(--text3)">150+ clan uniti</strong>',
+  },
+  NL: {
+    badge:'BOYCOT ACTIEF', eyebrow:'Officiële Community Aankondiging', hero_title:'Rush Royale Boycot',
+    hero_sub:'Clanleiders en sleutelfiguren uit de Rush Royale community zijn samengekomen om een bestedingsboycot te coördineren.',
+    stat_clans:'Clans Verenigd', stat_goal:'Doel', stat_spend:'Uitgaven',
+    instruction:'Klik een sectie om te openen — hover om te markeren.',
+    q1_title:'Waarom boycotten we de nieuwe eenheid?',
+    q1_body:`<p>We zijn allemaal verliefd geworden op Rush Royale. Suggesties via officiële kanalen werden grotendeels genegeerd.</p><p><strong>Deze boycot richt zich op waar de ontwikkelaars het meest om geven — hun inkomsten.</strong></p>`,
+    q2_title:'Wanneer is dit gepland?',
+    q2_body:`<p>De boycot begint bij de <strong>release van de nieuwe eenheid</strong>.</p><ul><li>De nieuwe eenheid niet kopen</li><li>Minimale — en indien mogelijk geen — uitgaven gedurende het event</li></ul><p>Wij willen <strong>echte verbintenissen met redelijke tijdlijnen</strong> — geen vage beloftes van "binnenkort".</p>`,
+    q3_title:'Wat kun jij nu doen?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Herstel je profielcosmetica</strong> naar de standaard Bombardier foto en verwijder alle badges, titels en decoraties. <em>CCs zijn vrijgesteld.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Stop met besteden tijdens het Festival of Talents.</strong> Koop je platina <em>van tevoren</em>.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Verspreid het woord</strong> naar alle spelers die je kunt bereiken.</div></div>`,
+    q4_title:'Wat als ik Moloch tegenkom in PvP?',
+    q4_body:`<p>Sommige Molochs zullen onvermijdelijk verschijnen in PvP. Dat begrijpen we.</p><p><strong>Weersta de verleiding dit seizoen.</strong></p><p>Voor clans: <strong>we vragen niet om leden te verwijderen</strong>. Handel naar eigen inzicht.</p>`,
+    q5_title:'Wat vragen we eigenlijk?',
+    q5_body:`<p>Er wordt een open brief naar de ontwikkelaars gestuurd met een verzoek om tastbare verbeteringen.</p><p><strong>We willen niet worden behandeld als melkkoeien.</strong></p><p><em>Link naar de open brief — binnenkort beschikbaar.</em></p>`,
+    q6_title:'Conclusie — sta als één',
+    q6_body:`<p>We vertegenwoordigen <strong>meer dan 150 clans</strong> en samen kunnen we echte verandering bewerkstelligen.</p><p>Als we als één staan, sturen we een sterk signaal. Doe alsjeblieft mee.</p>`,
+    footer1:'Dit is een onofficiële communitybeweging, niet gelieerd aan het Rush Royale ontwikkelteam.',
+    footer2:'Gecoördineerd door clanleiders uit de Rush Royale community · <strong style="color:var(--text3)">150+ clans verenigd</strong>',
+  },
+  PT: {
+    badge:'BOICOTE ATIVO', eyebrow:'Anúncio Oficial da Comunidade', hero_title:'Boicote Rush Royale',
+    hero_sub:'Líderes de clã e figuras-chave da comunidade Rush Royale se uniram para coordenar um boicote de gastos.',
+    stat_clans:'Clãs Unidos', stat_goal:'Objetivo', stat_spend:'Gastos',
+    instruction:'Clique em qualquer seção para expandir — passe o mouse para destacar.',
+    q1_title:'Por que estamos boicotando a nova unidade?',
+    q1_body:`<p>Todos nós nos apaixonamos por Rush Royale. As sugestões enviadas pelos canais oficiais foram em grande parte ignoradas.</p><p><strong>Este boicote visa onde os desenvolvedores mais se importam — seus lucros.</strong></p>`,
+    q2_title:'Quando está planejado?',
+    q2_body:`<p>O boicote começa com o <strong>lançamento da nova unidade</strong>.</p><ul><li>Não comprar a nova unidade</li><li>Gastos mínimos — e se possível nenhum — durante todo o evento</li></ul><p>Queremos ver <strong>compromissos genuínos com prazos razoáveis</strong> — não promessas vagas de "em breve".</p>`,
+    q3_title:'O que você pode fazer agora?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Reverta seus cosméticos de perfil</strong> para a imagem padrão do Bombardeiro e remova todos os emblemas, títulos e decorações. <em>CCs estão isentos.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Pare de gastar durante o Festival of Talents.</strong> Compre seu platina <em>antes</em> do evento.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Espalhe a mensagem</strong> para todos os jogadores que puder alcançar.</div></div>`,
+    q4_title:'E se eu enfrentar Moloch no PvP?',
+    q4_body:`<p>Alguns Molochs inevitavelmente aparecerão no PvP. Entendemos isso.</p><p><strong>Por favor, resista à tentação nesta temporada.</strong></p><p>Para os clãs: <strong>não pedimos que ninguém seja removido</strong>. Aja conforme seu julgamento.</p>`,
+    q5_title:'O que estamos realmente pedindo?',
+    q5_body:`<p>Uma carta aberta será enviada aos desenvolvedores solicitando melhorias concretas.</p><p><strong>Não queremos ser tratados como vacas leiteiras.</strong></p><p><em>Link para a carta aberta — em breve.</em></p>`,
+    q6_title:'Conclusão — unidos como um',
+    q6_body:`<p>Representamos <strong>mais de 150 clãs</strong> e juntos podemos trazer mudanças reais.</p><p>Se ficarmos unidos, enviaremos uma mensagem forte. Por favor, fique conosco.</p>`,
+    footer1:'Este é um movimento comunitário não oficial, não afiliado à equipe de desenvolvimento de Rush Royale.',
+    footer2:'Coordenado por líderes de clã da comunidade Rush Royale · <strong style="color:var(--text3)">150+ clãs unidos</strong>',
+  },
+  RU: {
+    badge:'БОЙКОТ АКТИВЕН', eyebrow:'Официальное объявление сообщества', hero_title:'Бойкот Rush Royale',
+    hero_sub:'Лидеры кланов и ключевые фигуры сообщества Rush Royale объединились, чтобы скоординировать бойкот трат.',
+    stat_clans:'Кланов объединено', stat_goal:'Цель', stat_spend:'Трат',
+    instruction:'Нажмите на раздел, чтобы раскрыть — наведите курсор для подсветки.',
+    q1_title:'Почему мы бойкотируем новый юнит?',
+    q1_body:`<p>Мы все полюбили Rush Royale. Предложения через официальные каналы в основном игнорировались.</p><p><strong>Этот бойкот бьёт туда, где разработчикам важнее всего — по доходам.</strong></p><p>Мы надеемся добиться реальной ответственности и диалога.</p>`,
+    q2_title:'Когда это запланировано?',
+    q2_body:`<p>Бойкот начинается с <strong>выхода нового юнита</strong>.</p><ul><li>Не покупать новый юнит</li><li>Минимальные — а если возможно, нулевые — траты на протяжении всего события</li></ul><p>Мы хотим видеть <strong>реальные обязательства с разумными сроками</strong> — а не расплывчатые обещания «скоро».</p>`,
+    q3_title:'Что вы можете сделать прямо сейчас?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Сбросьте косметику профиля</strong> до стандартного изображения Bombardier и уберите все значки, титулы и украшения. <em>CC освобождены от участия.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Прекратите тратить деньги во время Festival of Talents.</strong> Купите платину <em>заранее</em>.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Распространяйте информацию</strong> среди всех игроков, которых вы можете достичь.</div></div>`,
+    q4_title:'Что если я столкнусь с Молохом в PvP?',
+    q4_body:`<p>Некоторые Молохи неизбежно появятся в PvP. Мы это понимаем.</p><p><strong>Пожалуйста, устойте перед соблазном в этом сезоне.</strong></p><p>Для кланов: <strong>мы не просим никого исключать</strong>. Действуйте по своему усмотрению.</p>`,
+    q5_title:'Чего мы на самом деле добиваемся?',
+    q5_body:`<p>Открытое письмо будет направлено разработчикам с требованием ощутимых улучшений.</p><p><strong>Мы не хотим, чтобы с нами обращались как с дойными коровами.</strong></p><p><em>Ссылка на открытое письмо — скоро.</em></p>`,
+    q6_title:'Заключение — стоять как один',
+    q6_body:`<p>Мы представляем <strong>более 150 кланов</strong> и вместе можем добиться реальных изменений.</p><p>Если мы держимся вместе, мы пошлём чёткий сигнал. Пожалуйста, встаньте рядом с нами.</p>`,
+    footer1:'Это неофициальное движение сообщества, не аффилированное с командой разработчиков Rush Royale.',
+    footer2:'Координируется лидерами кланов сообщества Rush Royale · <strong style="color:var(--text3)">150+ кланов объединены</strong>',
+  },
+  TR: {
+    badge:'BOYKOT AKTİF', eyebrow:'Resmi Topluluk Duyurusu', hero_title:'Rush Royale Boykotu',
+    hero_sub:'Rush Royale topluluğunun klan liderleri ve kilit isimleri, harcama boykotunu koordine etmek için bir araya geldi.',
+    stat_clans:'Birleşen Klan', stat_goal:'Hedef', stat_spend:'Harcama',
+    instruction:'Genişletmek için herhangi bir bölüme tıklayın — vurgulamak için üzerine gelin.',
+    q1_title:'Neden yeni birimi boykot ediyoruz?',
+    q1_body:`<p>Hepimiz Rush Royale'e aşık olduk. Resmi kanallar aracılığıyla iletilen öneriler büyük çoğunlukla görmezden gelindi.</p><p><strong>Bu boykot, geliştiricilerin en çok önem verdiği yeri hedef alıyor — kârlılıklarını.</strong></p>`,
+    q2_title:'Bu ne zaman başlayacak?',
+    q2_body:`<p>Boykot, <strong>yeni birimin yayınlanmasıyla</strong> başlıyor.</p><ul><li>Yeni birimi satın almamak</li><li>Etkinlik süresince minimum — mümkünse sıfır — harcama</li></ul><p>"Yakında" gibi belirsiz vaatler değil, <strong>makul zaman çizelgeleriyle gerçek taahhütler</strong> istiyoruz.</p>`,
+    q3_title:'Şu anda ne yapabilirsiniz?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Profil kozmetiklerinizi</strong> varsayılan Bombardıman profiline döndürün ve tüm rozetleri, unvanları ve süslemeleri kaldırın. <em>İçerik üreticileri muaf tutulmaktadır.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Festival of Talents süresince harcama yapmayı bırakın.</strong> Platinumu <em>önceden</em> alın.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Mesajı yayın</strong> — ulaşabileceğiniz tüm oyunculara bildirin.</div></div>`,
+    q4_title:'PvP\'de Moloch ile karşılaşırsam ne olur?',
+    q4_body:`<p>Bazı Molochlar PvP'de kaçınılmaz olarak görünecek. Bunu anlıyoruz.</p><p><strong>Lütfen bu sezon direncini kır.</strong></p><p>Klanlar için: <strong>kimsenin kovulmasını istemiyoruz</strong>. Kendi kararınızı verin.</p>`,
+    q5_title:'Aslında ne istiyoruz?',
+    q5_body:`<p>Geliştiricilere somut iyileştirmeler talep eden açık bir mektup gönderilecek.</p><p><strong>Para makinesi olarak muamele görmek istemiyoruz.</strong></p><p><em>Açık mektup bağlantısı — yakında.</em></p>`,
+    q6_title:'Sonuç — tek yürek olarak durun',
+    q6_body:`<p><strong>150'den fazla klanı</strong> temsil ediyoruz ve birlikte gerçek bir değişim sağlayabiliriz.</p><p>Birlik içinde durursak güçlü bir mesaj göndereceğiz. Lütfen bizimle olun.</p>`,
+    footer1:'Bu, Rush Royale geliştirme ekibiyle bağlantısı olmayan resmi olmayan bir topluluk hareketidir.',
+    footer2:'Rush Royale topluluğunun klan liderleri tarafından koordine edilmektedir · <strong style="color:var(--text3)">150+ klan birleşti</strong>',
+  },
+  RO: {
+    badge:'BOICOT ACTIV', eyebrow:'Anunț Oficial al Comunității', hero_title:'Boicotul Rush Royale',
+    hero_sub:'Liderii de clan și figurile cheie din comunitatea Rush Royale s-au unit pentru a coordona un boicot al cheltuielilor.',
+    stat_clans:'Clanuri Unite', stat_goal:'Obiectiv', stat_spend:'Cheltuieli',
+    instruction:'Faceți clic pe orice secțiune pentru a extinde — treceți mouse-ul pentru evidențiere.',
+    q1_title:'De ce boicotăm noua unitate?',
+    q1_body:`<p>Cu toții ne-am îndrăgostit de Rush Royale. Sugestiile transmise prin canalele oficiale au fost în mare parte ignorate.</p><p><strong>Acest boicot vizează acolo unde contează cel mai mult pentru dezvoltatori — profitul lor.</strong></p>`,
+    q2_title:'Când este planificat?',
+    q2_body:`<p>Boicotul începe odată cu <strong>lansarea noii unități</strong>.</p><ul><li>Să nu cumpere noua unitate</li><li>Cheltuieli minime — și dacă este posibil zero — pe durata evenimentului</li></ul><p>Dorim <strong>angajamente reale cu termene rezonabile</strong> — nu promisiuni vagi de „în curând".</p>`,
+    q3_title:'Ce puteți face acum?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Reveniți la cosmeticele implicite</strong> ale profilului și eliminați toate insignele, titlurile și decorațiunile. <em>CC sunt scutiți.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Opriți cheltuielile pe durata Festival of Talents.</strong> Cumpărați platina <em>înainte</em> de eveniment.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Răspândiți mesajul</strong> către toți jucătorii pe care îi puteți contacta.</div></div>`,
+    q4_title:'Ce fac dacă mă confrunt cu Moloch în PvP?',
+    q4_body:`<p>Unii Moloch vor apărea inevitabil în PvP. Înțelegem asta.</p><p><strong>Vă rugăm să rezistați tentației în acest sezon.</strong></p><p>Pentru clanuri: <strong>nu cerem să fie eliminat nimeni</strong>. Acționați după propriul judecată.</p>`,
+    q5_title:'Ce cerem de fapt?',
+    q5_body:`<p>O scrisoare deschisă va fi trimisă dezvoltatorilor solicitând îmbunătățiri concrete.</p><p><strong>Nu vrem să fim tratați ca surse de bani.</strong></p><p><em>Linkul scrisorii deschise — în curând.</em></p>`,
+    q6_title:'Concluzie — stați ca unul singur',
+    q6_body:`<p>Reprezentăm <strong>peste 150 de clanuri</strong> și împreună putem aduce o schimbare reală.</p><p>Dacă stăm uniți, vom trimite un mesaj puternic. Vă rugăm să stați alături de noi.</p>`,
+    footer1:'Acesta este un mișcare comunitară neoficială, neafiliată cu echipa de dezvoltare Rush Royale.',
+    footer2:'Coordonată de lideri de clan din comunitatea Rush Royale · <strong style="color:var(--text3)">150+ clanuri unite</strong>',
+  },
+};
+
+let currentLang = 'EN';
+
+function buildDropdown() {
+  document.getElementById('lang-dropdown').innerHTML = LANGS.map(l => `
+    <button class="lang-opt${l.code===currentLang?' active':''}" onclick="setLang('${l.code}')">
+      <span class="lang-opt-flag">${l.flag}</span>
+      <span class="lang-opt-names">
+        <span class="lang-opt-en">${l.en}</span>
+        <span class="lang-opt-native">${l.native}</span>
+      </span>
+      <span class="lang-opt-code">${l.code}</span>
+    </button>`).join('');
+}
+
+function toggleLang() {
+  document.getElementById('lang-wrap').classList.toggle('open');
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('#lang-wrap')) document.getElementById('lang-wrap').classList.remove('open');
+});
+
+function setLang(code) {
+  currentLang = code;
+  const lang = LANGS.find(l => l.code === code);
+  const t = T[code] || T['EN'];
+  document.getElementById('lang-flag').textContent = lang.flag;
+  document.getElementById('lang-code').textContent = lang.code;
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const key = el.getAttribute('data-key');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  buildDropdown();
+  document.getElementById('lang-wrap').classList.remove('open');
+  document.querySelectorAll('.bacc-item.open').forEach(item => {
+    const body = document.getElementById(item.id + '-body');
+    if (body) { body.style.maxHeight = 'none'; setTimeout(() => { body.style.maxHeight = body.scrollHeight + 'px'; }, 10); }
+  });
+}
+
 function baccToggle(id) {
   const item = document.getElementById(id);
   const body = document.getElementById(id + '-body');
@@ -470,11 +548,11 @@ function baccToggle(id) {
     const b = document.getElementById(i.id + '-body');
     if (b) b.style.maxHeight = '0';
   });
-  if (!isOpen) {
-    item.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
-  }
+  if (!isOpen) { item.classList.add('open'); body.style.maxHeight = body.scrollHeight + 'px'; }
 }
+
+buildDropdown();
+setLang('EN');
 </script>
 </body>
 </html>
