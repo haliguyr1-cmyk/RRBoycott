@@ -87,11 +87,29 @@
     top: calc(100% + 6px); right: 0;
     background: var(--bg2); border: 1px solid var(--border2);
     border-radius: var(--radius); min-width: 230px;
-    z-index: 999; overflow: hidden;
+    z-index: 999;
     box-shadow: 0 8px 32px rgba(0,0,0,0.6);
-    max-height: 420px; overflow-y: auto;
+    max-height: 600px; overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) var(--bg4);
+  }
+  .lang-dropdown::-webkit-scrollbar { width: 6px; }
+  .lang-dropdown::-webkit-scrollbar-track { background: var(--bg4); border-radius: 0 var(--radius) var(--radius) 0; }
+  .lang-dropdown::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+  .lang-dropdown::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
+  /* fade hint at bottom so users know there's more */
+  .lang-wrap.open::after {
+    content: ''; pointer-events: none;
+    position: absolute; bottom: 0; left: 0; right: 6px;
+    height: 36px;
+    background: linear-gradient(to bottom, transparent, var(--bg2));
+    border-radius: 0 0 var(--radius) var(--radius);
+    z-index: 1000;
   }
   .lang-wrap.open .lang-dropdown { display: block; }
+  @media (min-width: 481px) {
+    .lang-dropdown { max-height: min(600px, 80vh); }
+  }
   .lang-opt {
     display: flex; align-items: center; gap: 10px;
     padding: 10px 14px; cursor: pointer;
