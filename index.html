@@ -176,6 +176,25 @@
 
   /* ── Footer ── */
   .footer { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; font-size: 11px; color: var(--text3); line-height: 1.8; }
+  .footer a[href*="google"] {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px;
+    padding: 7px 16px;
+    background: rgba(212,160,23,0.1);
+    border: 1px solid rgba(212,160,23,0.4);
+    border-radius: 20px;
+    color: var(--gold) !important;
+    font-size: 12px; font-weight: 600;
+    text-decoration: none !important;
+    opacity: 1 !important;
+    transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .footer a[href*="google"]:hover {
+    background: rgba(212,160,23,0.2);
+    border-color: var(--gold);
+    box-shadow: 0 0 12px rgba(212,160,23,0.25);
+  }
 
   /* ── Scrollbar ── */
   ::-webkit-scrollbar { width: 5px; }
@@ -294,6 +313,10 @@ const LANGS = [
   { code:'RU', flag:'🇷🇺', en:'Russian',    native:'Русский' },
   { code:'TR', flag:'🇹🇷', en:'Turkish',    native:'Türkçe' },
   { code:'RO', flag:'🇷🇴', en:'Romanian',   native:'Română' },
+  { code:'AR', flag:'🇸🇦', en:'Arabic',     native:'العربية' },
+  { code:'ZH', flag:'🇨🇳', en:'Mandarin',   native:'中文' },
+  { code:'JA', flag:'🇯🇵', en:'Japanese',   native:'日本語' },
+  { code:'KO', flag:'🇰🇷', en:'Korean',     native:'한국어' },
 ];
 
 const T = {
@@ -315,7 +338,7 @@ const T = {
     q6_title:'Conclusion — stand as one',
     q6_body:`<p>This is important — and potentially our only real shot to make an impact. Will we immediately get everything we want? No. Should that be reason to give up? Absolutely not.</p><p>We represent <strong>over 150 clans</strong> and together we can bring about real change. Put down the wallet and pick up the metaphorical pitchfork — because we are doing this together.</p><p>If we stand as one, we will send a strong message. Please stand with us.</p>`,
     footer1:'This is an unofficial community movement and is not affiliated with or endorsed by the Rush Royale development team.',
-    footer2:'Coordinated by clan leaders across the Rush Royale community · <strong style="color:var(--text3)">150+ clans united</strong>',
+    footer2:'Coordinated by clan leaders across the Rush Royale community · <strong style="color:var(--text3)">150+ clans united</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   DE: {
     badge:'BOYKOTT AKTIV', eyebrow:'Offizielle Community-Ankündigung', hero_title:'Rush Royale Boykott',
@@ -335,7 +358,7 @@ const T = {
     q6_title:'Fazit — gemeinsam stark',
     q6_body:`<p>Das ist wichtig — und möglicherweise unsere einzige echte Chance. Werden wir sofort alles bekommen? Nein. Aber sollte das ein Grund zum Aufgeben sein? Absolut nicht.</p><p>Wir repräsentieren <strong>über 150 Clans</strong>. Legt die Geldbörse hin — wir machen das gemeinsam.</p><p>Wenn wir als Einheit stehen, senden wir eine starke Botschaft.</p>`,
     footer1:'Dies ist eine inoffizielle Community-Bewegung und ist nicht mit dem Rush-Royale-Entwicklungsteam verbunden.',
-    footer2:'Koordiniert von Clanführern der Rush-Royale-Community · <strong style="color:var(--text3)">150+ Clans vereint</strong>',
+    footer2:'Koordiniert von Clanführern der Rush-Royale-Community · <strong style="color:var(--text3)">150+ Clans vereint</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   ES: {
     badge:'BOICOT ACTIVO', eyebrow:'Anuncio Oficial de la Comunidad', hero_title:'Boicot de Rush Royale',
@@ -355,7 +378,7 @@ const T = {
     q6_title:'Conclusión — unidos como uno',
     q6_body:`<p>Representamos a <strong>más de 150 clanes</strong> y juntos podemos lograr un cambio real. Guardemos la billetera y levantemos las horcas metafóricas.</p><p>Si nos mantenemos unidos, enviaremos un mensaje poderoso. Por favor, únete a nosotros.</p>`,
     footer1:'Este es un movimiento comunitario no oficial y no está afiliado ni respaldado por el equipo de desarrollo de Rush Royale.',
-    footer2:'Coordinado por líderes de clanes de la comunidad de Rush Royale · <strong style="color:var(--text3)">150+ clanes unidos</strong>',
+    footer2:'Coordinado por líderes de clanes de la comunidad de Rush Royale · <strong style="color:var(--text3)">150+ clanes unidos</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   FR: {
     badge:'BOYCOTT ACTIF', eyebrow:'Annonce Officielle de la Communauté', hero_title:'Boycott Rush Royale',
@@ -375,7 +398,7 @@ const T = {
     q6_title:'Conclusion — unis comme un seul',
     q6_body:`<p>Nous représentons <strong>plus de 150 clans</strong> et ensemble nous pouvons apporter un vrai changement.</p><p>Si nous restons unis, nous enverrons un message fort. Rejoignez-nous.</p>`,
     footer1:'Ceci est un mouvement communautaire non officiel, non affilié à l\'équipe de développement de Rush Royale.',
-    footer2:'Coordonné par des chefs de clan de la communauté Rush Royale · <strong style="color:var(--text3)">150+ clans unis</strong>',
+    footer2:'Coordonné par des chefs de clan de la communauté Rush Royale · <strong style="color:var(--text3)">150+ clans unis</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   IT: {
     badge:'BOICOTTAGGIO ATTIVO', eyebrow:'Annuncio Ufficiale della Community', hero_title:'Boicottaggio Rush Royale',
@@ -395,7 +418,7 @@ const T = {
     q6_title:'Conclusione — uniti come uno',
     q6_body:`<p>Rappresentiamo <strong>oltre 150 clan</strong> e insieme possiamo portare un vero cambiamento.</p><p>Se restiamo uniti, invieremo un messaggio forte. Unitevi a noi.</p>`,
     footer1:'Questo è un movimento comunitario non ufficiale, non affiliato con il team di sviluppo di Rush Royale.',
-    footer2:'Coordinato dai leader dei clan della community di Rush Royale · <strong style="color:var(--text3)">150+ clan uniti</strong>',
+    footer2:'Coordinato dai leader dei clan della community di Rush Royale · <strong style="color:var(--text3)">150+ clan uniti</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   NL: {
     badge:'BOYCOT ACTIEF', eyebrow:'Officiële Community Aankondiging', hero_title:'Rush Royale Boycot',
@@ -415,7 +438,7 @@ const T = {
     q6_title:'Conclusie — sta als één',
     q6_body:`<p>We vertegenwoordigen <strong>meer dan 150 clans</strong> en samen kunnen we echte verandering bewerkstelligen.</p><p>Als we als één staan, sturen we een sterk signaal. Doe alsjeblieft mee.</p>`,
     footer1:'Dit is een onofficiële communitybeweging, niet gelieerd aan het Rush Royale ontwikkelteam.',
-    footer2:'Gecoördineerd door clanleiders uit de Rush Royale community · <strong style="color:var(--text3)">150+ clans verenigd</strong>',
+    footer2:'Gecoördineerd door clanleiders uit de Rush Royale community · <strong style="color:var(--text3)">150+ clans verenigd</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   PT: {
     badge:'BOICOTE ATIVO', eyebrow:'Anúncio Oficial da Comunidade', hero_title:'Boicote Rush Royale',
@@ -435,7 +458,7 @@ const T = {
     q6_title:'Conclusão — unidos como um',
     q6_body:`<p>Representamos <strong>mais de 150 clãs</strong> e juntos podemos trazer mudanças reais.</p><p>Se ficarmos unidos, enviaremos uma mensagem forte. Por favor, fique conosco.</p>`,
     footer1:'Este é um movimento comunitário não oficial, não afiliado à equipe de desenvolvimento de Rush Royale.',
-    footer2:'Coordenado por líderes de clã da comunidade Rush Royale · <strong style="color:var(--text3)">150+ clãs unidos</strong>',
+    footer2:'Coordenado por líderes de clã da comunidade Rush Royale · <strong style="color:var(--text3)">150+ clãs unidos</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   RU: {
     badge:'БОЙКОТ АКТИВЕН', eyebrow:'Официальное объявление сообщества', hero_title:'Бойкот Rush Royale',
@@ -455,7 +478,7 @@ const T = {
     q6_title:'Заключение — стоять как один',
     q6_body:`<p>Мы представляем <strong>более 150 кланов</strong> и вместе можем добиться реальных изменений.</p><p>Если мы держимся вместе, мы пошлём чёткий сигнал. Пожалуйста, встаньте рядом с нами.</p>`,
     footer1:'Это неофициальное движение сообщества, не аффилированное с командой разработчиков Rush Royale.',
-    footer2:'Координируется лидерами кланов сообщества Rush Royale · <strong style="color:var(--text3)">150+ кланов объединены</strong>',
+    footer2:'Координируется лидерами кланов сообщества Rush Royale · <strong style="color:var(--text3)">150+ кланов объединены</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   TR: {
     badge:'BOYKOT AKTİF', eyebrow:'Resmi Topluluk Duyurusu', hero_title:'Rush Royale Boykotu',
@@ -475,7 +498,7 @@ const T = {
     q6_title:'Sonuç — tek yürek olarak durun',
     q6_body:`<p><strong>150'den fazla klanı</strong> temsil ediyoruz ve birlikte gerçek bir değişim sağlayabiliriz.</p><p>Birlik içinde durursak güçlü bir mesaj göndereceğiz. Lütfen bizimle olun.</p>`,
     footer1:'Bu, Rush Royale geliştirme ekibiyle bağlantısı olmayan resmi olmayan bir topluluk hareketidir.',
-    footer2:'Rush Royale topluluğunun klan liderleri tarafından koordine edilmektedir · <strong style="color:var(--text3)">150+ klan birleşti</strong>',
+    footer2:'Rush Royale topluluğunun klan liderleri tarafından koordine edilmektedir · <strong style="color:var(--text3)">150+ klan birleşti</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
   RO: {
     badge:'BOICOT ACTIV', eyebrow:'Anunț Oficial al Comunității', hero_title:'Boicotul Rush Royale',
@@ -495,7 +518,87 @@ const T = {
     q6_title:'Concluzie — stați ca unul singur',
     q6_body:`<p>Reprezentăm <strong>peste 150 de clanuri</strong> și împreună putem aduce o schimbare reală.</p><p>Dacă stăm uniți, vom trimite un mesaj puternic. Vă rugăm să stați alături de noi.</p>`,
     footer1:'Acesta este un mișcare comunitară neoficială, neafiliată cu echipa de dezvoltare Rush Royale.',
-    footer2:'Coordonată de lideri de clan din comunitatea Rush Royale · <strong style="color:var(--text3)">150+ clanuri unite</strong>',
+    footer2:'Coordonată de lideri de clan din comunitatea Rush Royale · <strong style="color:var(--text3)">150+ clanuri unite</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
+  },
+  AR: {
+    badge:'المقاطعة نشطة', eyebrow:'إعلان رسمي من المجتمع', hero_title:'مقاطعة Rush Royale',
+    hero_sub:'اجتمع قادة العشائر والشخصيات الرئيسية في مجتمع Rush Royale لتنسيق مقاطعة الإنفاق. اقرأ أدناه لتفهم لماذا ومتى وكيف يمكنك الوقوف معنا.',
+    stat_clans:'عشيرة متحدة', stat_goal:'الهدف', stat_spend:'الإنفاق',
+    instruction:'انقر على أي قسم للتوسيع — مرر الماوس للتمييز.',
+    q1_title:'لماذا نقاطع الوحدة الجديدة؟',
+    q1_body:`<p>لقد أحببنا جميعاً Rush Royale ومجتمعه ونريده أن ينجح. حاول كثيرون تقديم اقتراحات عبر القنوات الرسمية لكنها أُهملت في معظمها.</p><p>لقد استنفدنا جميع منتديات النقاش الرسمية دون جدوى. <strong>تستهدف هذه المقاطعة ما يهم المطورين أكثر — أرباحهم.</strong></p><p>نأمل في فرض قدر من المساءلة وحوار حقيقي لإحداث تحسينات ملموسة.</p>`,
+    q2_title:'متى يُخطط لهذا؟',
+    q2_body:`<p>تبدأ المقاطعة مع <strong>إطلاق الوحدة الجديدة</strong>. نطلب منك تشجيع مجتمعك على عدم الإنفاق:</p><ul><li>عدم شراء الوحدة الجديدة</li><li>إنفاق أدنى — وإن أمكن صفر — طوال فترة الحدث</li></ul><p>نريد <strong>التزامات حقيقية بتحسينات ضمن جداول زمنية معقولة</strong> — لا وعوداً مبهمة بـ"قريباً".</p>`,
+    q3_title:'ماذا يمكنك فعله الآن؟',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>أعد تعيين مستحضرات ملفك الشخصي</strong> إلى الصورة الافتراضية للقاذف وأزل جميع الشارات والألقاب والزينة. <em>صنّاع المحتوى معفيون.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>توقف عن الإنفاق خلال Festival of Talents.</strong> اشترِ البلاتين <em>مسبقاً</em> لتقليل الإنفاق خلال فترة الحدث.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>انشر الخبر</strong> لكل لاعب تستطيع الوصول إليه. كلما عرف الناس أكثر، كانت رسالتنا أقوى.</div></div>`,
+    q4_title:'ماذا لو واجهت Moloch في PvP؟',
+    q4_body:`<p>سيظهر بعض لاعبي Moloch حتماً في PvP، ونحن نفهم ذلك.</p><p><strong>يُرجى مقاومة الإغراء في هذا الموسم.</strong> ستُضعَّف الوحدة في نهاية المطاف.</p><p>للعشائر: <strong>نحن لا نطلب إزالة أي أعضاء</strong>. تصرف وفق ما تراه مناسباً كقائد مجتمع.</p>`,
+    q5_title:'ما الذي نطلبه فعلاً؟',
+    q5_body:`<p>ستُرسَل رسالة مفتوحة إلى المطورين تطالب بتحسينات ملموسة وعقلانية.</p><p><strong>لا نريد أن نُعامَل كأبقار حلوب.</strong> نريد أن نُرى كالمجتمع الرائع الذي نحن عليه حقاً.</p><p><em>رابط الرسالة المفتوحة — قريباً.</em></p>`,
+    q6_title:'الخاتمة — قفوا كرجل واحد',
+    q6_body:`<p>نمثل <strong>أكثر من 150 عشيرة</strong> ويمكننا معاً إحداث تغيير حقيقي. ضع محفظتك جانباً والتقط المشعل المجازي — لأننا نفعل هذا معاً.</p><p>إذا وقفنا كتلة واحدة، سنرسل رسالة قوية. يُرجى الوقوف معنا.</p>`,
+    footer1:'هذه حركة مجتمعية غير رسمية وغير منتسبة إلى فريق تطوير Rush Royale.',
+    footer2:'منسَّقة من قِبل قادة العشائر في مجتمع Rush Royale · <strong style="color:var(--text3)">150+ عشيرة متحدة</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
+  },
+  ZH: {
+    badge:'抵制进行中', eyebrow:'社区官方公告', hero_title:'Rush Royale 抵制行动',
+    hero_sub:'Rush Royale 社区的公会领袖及核心成员已联合起来，协调一场消费抵制行动。请阅读以下内容，了解原因、时间及如何与我们并肩而立。',
+    stat_clans:'联合公会', stat_goal:'目标', stat_spend:'消费',
+    instruction:'点击任意部分展开 — 悬停以高亮显示。',
+    q1_title:'我们为什么抵制新单位？',
+    q1_body:`<p>我们都爱上了 Rush Royale 及其社区，并希望它能成功。许多人曾尝试通过官方渠道提交建议和反馈——主要的 Discord、圆桌论坛——但大多数情况下都石沉大海。</p><p>我们已穷尽所有正式讨论途径，却收效甚微。<strong>此次抵制旨在打击开发商最在意的地方——他们的收入。</strong></p><p>我们希望借此迫使开发商承担责任，并开展真诚的对话，以促进游戏的长期健康发展。</p>`,
+    q2_title:'计划何时开始？',
+    q2_body:`<p>抵制行动将于<strong>新单位发布时</strong>正式开始。我们请求你鼓励你的社区不要在 Festival of Talents 期间消费。具体包括：</p><ul><li>不购买新单位</li><li>在整个活动期间将消费降至最低——如可能，则为零消费</li></ul><p>我们希望看到<strong>有合理时间表的真实改进承诺</strong>——而非含糊的"即将推出"。</p>`,
+    q3_title:'你现在可以做什么？',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>将你的个人资料外观</strong>恢复为默认的轰炸手头像，并移除所有徽章、称号、装饰和相框。<em>CC（内容创作者）因开发者计划的威胁而豁免。</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>在 Festival of Talents 期间停止消费。</strong>如需购买赛季通行证，请<em>提前</em>购买白金以减少活动期间的消费。</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>广泛传播</strong>——告知你能联系到的每一位玩家。知道的人越多，我们的力量越强。</div></div>`,
+    q4_title:'如果我在 PvP 中遇到 Moloch 怎么办？',
+    q4_body:`<p>并非所有玩家都能通过 Discord 联系到，因此 PvP 中难免会出现一些 Moloch。我们理解这一点。</p><p><strong>请在本赛季克制诱惑。</strong>该单位最终会被削弱。</p><p>对于公会：如有成员联系不上，<strong>我们并不要求将其移除</strong>。请根据你作为社区领袖的判断行事。</p>`,
+    q5_title:'我们究竟在争取什么？',
+    q5_body:`<p>我们将向开发商发送一封公开信，详细阐述上述问题，并要求对游戏的长期健康发展作出合理、切实的改进。</p><p><strong>我们不想被当作提款机。</strong>我们希望被视为真正优秀的社区。</p><p><em>公开信链接——敬请期待。</em></p>`,
+    q6_title:'结语——团结一心',
+    q6_body:`<p>这至关重要——也可能是我们真正发声的唯一机会。我们能立刻得到一切吗？不能。但这是放弃的理由吗？绝对不是。</p><p>我们代表<strong>超过 150 个公会</strong>，团结起来，我们可以带来真正的改变。放下钱包，拿起象征性的火把——因为我们在一起。</p><p>如果我们团结一致，就能发出强有力的信号。请与我们并肩而立。</p>`,
+    footer1:'这是一场非官方的社区行动，与 Rush Royale 开发团队无关，亦未获其认可。',
+    footer2:'由 Rush Royale 社区各公会领袖协调 · <strong style="color:var(--text3)">150+ 公会联合</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
+  },
+  JA: {
+    badge:'ボイコット実施中', eyebrow:'コミュニティ公式声明', hero_title:'Rush Royale ボイコット',
+    hero_sub:'Rush Royale コミュニティのクランリーダーや主要メンバーが集まり、課金ボイコットを共同で実施します。なぜ、いつ、どのように参加できるかを以下でご確認ください。',
+    stat_clans:'クラン連合', stat_goal:'目標', stat_spend:'課金',
+    instruction:'セクションをクリックして展開 — ホバーでハイライト。',
+    q1_title:'なぜ新ユニットをボイコットするのか？',
+    q1_body:`<p>私たちは皆、Rush Royale やそのコミュニティを愛し、成功してほしいと思っています。公式チャンネル（Discord、ラウンドテーブルなど）を通じて数多くの提案やフィードバックを送りましたが、ほとんど無視されてきました。</p><p>正式な議論の場はすべて試みましたが、成果はありませんでした。<strong>このボイコットは、開発者が最も重視するもの——収益——に打撃を与えることを目的としています。</strong></p><p>真の説明責任とダイアログを促し、ゲームの長期的な健全性に向けた意味ある改善を求めます。</p>`,
+    q2_title:'いつ開始するのか？',
+    q2_body:`<p>ボイコットは<strong>新ユニットのリリース</strong>と同時に開始します。Festival of Talents 期間中の課金を控えるようコミュニティに呼びかけてください：</p><ul><li>新ユニットを購入しない</li><li>イベント期間中は課金を最小限に——可能であればゼロに</li></ul><p>「近日中に」という曖昧な約束ではなく、<strong>合理的なスケジュールを伴う具体的な改善のコミットメント</strong>を求めます。</p>`,
+    q3_title:'今すぐできることは？',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>プロフィールコスメティクスをリセット</strong>してデフォルトのボンバルディア画像に戻し、バッジ・称号・デコレーション・フレームをすべて外してください。<em>開発者プログラムの制約があるため、CC（コンテンツクリエイター）は除外されます。</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Festival of Talents 期間中の課金を停止してください。</strong>シーズンパスなどを購入する場合はイベント<em>前に</em>プラチナを買い、期間中の課金を最小化してください。</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>情報を広めてください</strong>——Discord 以外のプレイヤーにも届くよう、できる限り多くの人に伝えましょう。</div></div>`,
+    q4_title:'PvP で Moloch と当たったら？',
+    q4_body:`<p>Discord 経由で連絡が取れないプレイヤーも多く、PvP で Moloch が出現することは避けられません。それは理解しています。</p><p><strong>今シーズンは誘惑に抗ってください。</strong>ユニットはいつかナーフされます。</p><p>クランへ：連絡が取れないメンバーについて、<strong>除名を求めているわけではありません</strong>。コミュニティリーダーとして最善と思う行動を取ってください。</p>`,
+    q5_title:'私たちが本当に求めているものは？',
+    q5_body:`<p>開発者に宛てて公開書簡を送り、具体的な改善を要求します。</p><p><strong>私たちは「課金マシン」として扱われたくありません。</strong>私たちは素晴らしいコミュニティとして認められたいのです。</p><p><em>公開書簡のリンク——近日公開予定。</em></p>`,
+    q6_title:'結び——一丸となって立ち上がれ',
+    q6_body:`<p>これは重要な行動であり、私たちが真に影響を与えられる唯一の機会かもしれません。すぐにすべてが変わるとは限りません。でも、それは諦める理由にはなりません。</p><p>私たちは<strong>150以上のクラン</strong>を代表しており、団結すれば真の変化をもたらせます。財布をしまい、比喩的な松明を手に取りましょう——共に戦いましょう。</p><p>一丸となれば、強いメッセージを発信できます。どうか私たちと共に立ち上がってください。</p>`,
+    footer1:'これは非公式のコミュニティ活動であり、Rush Royale 開発チームとは無関係です。',
+    footer2:'Rush Royale コミュニティのクランリーダーたちにより調整 · <strong style="color:var(--text3)">150以上のクラン連合</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
+  },
+  KO: {
+    badge:'불매운동 진행 중', eyebrow:'커뮤니티 공식 발표', hero_title:'Rush Royale 불매운동',
+    hero_sub:'Rush Royale 커뮤니티의 클랜 리더와 핵심 인물들이 모여 소비 불매운동을 조직했습니다. 아래를 읽고 이유, 시기, 그리고 함께하는 방법을 확인하세요.',
+    stat_clans:'연합 클랜', stat_goal:'목표', stat_spend:'소비',
+    instruction:'섹션을 클릭하면 펼쳐집니다 — 마우스를 올리면 강조 표시됩니다.',
+    q1_title:'왜 새 유닛을 불매하는가?',
+    q1_body:`<p>우리 모두 Rush Royale과 그 커뮤니티를 사랑하며, 게임이 성공하길 바랍니다. 많은 사람들이 공식 채널을 통해 훌륭한 의견과 피드백을 전달하려 했지만, 대부분 묵살되었습니다.</p><p>모든 공식 토론 창구를 시도했지만 돌아오는 것은 없었습니다. <strong>이 불매운동은 개발사가 가장 중요하게 여기는 것 — 수익 — 을 겨냥합니다.</strong></p><p>우리는 진정한 책임감과 대화를 이끌어내 게임의 장기적 건전성을 위한 실질적인 개선을 이루고자 합니다.</p>`,
+    q2_title:'언제 시작하나요?',
+    q2_body:`<p>불매운동은 <strong>새 유닛 출시</strong>와 함께 시작됩니다. Festival of Talents 기간 동안 커뮤니티에 소비를 자제하도록 독려해주세요:</p><ul><li>새 유닛 구매 금지</li><li>이벤트 전 기간 동안 소비 최소화 — 가능하면 제로 소비</li></ul><p>막연한 "곧"이라는 약속이 아닌, <strong>합리적인 일정을 가진 진정한 개선 약속</strong>을 원합니다.</p>`,
+    q3_title:'지금 당장 할 수 있는 것은?',
+    q3_body:`<div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>프로필 꾸미기를 기본 폭격수 이미지로 되돌리고</strong> 모든 배지, 칭호, 장식, 프레임을 제거하세요. 커뮤니티가 얼마나 단결되어 있는지 보여주는 행동입니다. <em>CC(콘텐츠 크리에이터)는 개발자 프로그램의 위협 때문에 제외됩니다.</em></div></div><div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Festival of Talents 기간 동안 소비를 중단하세요.</strong> 시즌 패스 등을 구매할 계획이라면 이벤트 기간 중 소비를 줄이기 위해 플래티넘을 <em>미리</em> 구매하세요.</div></div><div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>소식을 퍼뜨리세요</strong> — 닿을 수 있는 모든 플레이어에게 알려주세요. Discord 밖의 플레이어들에게도 알릴수록 우리의 메시지는 강해집니다.</div></div>`,
+    q4_title:'PvP에서 Moloch를 만나면 어떻게 하나요?',
+    q4_body:`<p>Discord 등으로 연락이 닿지 않는 플레이어들이 있어 PvP에 Moloch가 불가피하게 등장할 수 있습니다. 우리는 이를 이해합니다.</p><p><strong>이번 시즌만큼은 유혹을 참아주세요.</strong> 유닛은 결국 너프될 것입니다.</p><p>클랜의 경우: 연락이 닿지 않는 멤버가 있다면 <strong>강제 탈퇴를 요구하지 않습니다</strong>. 커뮤니티 리더로서 최선이라고 생각하는 대로 행동하세요.</p>`,
+    q5_title:'우리가 실제로 요구하는 것은?',
+    q5_body:`<p>개발사에 공개서한을 보내 게임의 장기적 건전성을 위한 합리적이고 실질적인 개선을 요구할 것입니다.</p><p><strong>우리는 현금 인출기처럼 취급받고 싶지 않습니다.</strong> 우리가 실제로 어떤 훌륭한 커뮤니티인지 인정받고 싶습니다.</p><p><em>공개서한 링크 — 곧 공개 예정.</em></p>`,
+    q6_title:'결론 — 하나로 뭉쳐라',
+    q6_body:`<p>이것은 중요한 행동이며, 우리가 실질적인 영향을 미칠 수 있는 유일한 기회일 수도 있습니다. 즉시 모든 것을 얻을 수 있을까요? 아닙니다. 그렇다고 포기해야 할까요? 절대 아닙니다.</p><p>우리는 <strong>150개 이상의 클랜</strong>을 대표하며, 함께라면 진정한 변화를 만들 수 있습니다. 지갑은 내려놓고 비유적인 횃불을 들어올리세요 — 우리는 함께합니다.</p><p>하나로 뭉친다면 강력한 메시지를 전달할 수 있습니다. 함께해주세요.</p>`,
+    footer1:'이것은 비공식 커뮤니티 운동이며 Rush Royale 개발팀과 무관합니다.',
+    footer2:'Rush Royale 커뮤니티 클랜 리더들이 조직 · <strong style="color:var(--text3)">150+ 클랜 연합</strong> · <a href="https://docs.google.com/document/d/1kfZQLdXTeMqGtj01mt0kAdyapK4MwgFR39hAsZ8at7w/edit?usp=sharing" target="_blank" >📄 Source Document (EN)</a>',
   },
 };
 
@@ -531,6 +634,9 @@ function setLang(code) {
     const key = el.getAttribute('data-key');
     if (t[key] !== undefined) el.innerHTML = t[key];
   });
+  // RTL support for Arabic
+  document.documentElement.dir = (code === 'AR') ? 'rtl' : 'ltr';
+  document.documentElement.lang = code.toLowerCase();
   buildDropdown();
   document.getElementById('lang-wrap').classList.remove('open');
   document.querySelectorAll('.bacc-item.open').forEach(item => {
